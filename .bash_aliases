@@ -18,6 +18,8 @@ function command_exists() {
 	type "$1" &> /dev/null ;
 }
 
+alias get_ip="curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'"
+
 # WORK
 if [ -f ~/.dotfiles/.bash_aliases_work ]; then
     . ~/.dotfiles/.bash_aliases_work
