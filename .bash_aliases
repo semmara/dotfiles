@@ -18,9 +18,9 @@ function command_exists() {
 	type "$1" &> /dev/null ;
 }
 
-alias get_ip="curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'"
-alias get_gateway_mac="netstat -rn | awk '{if($1==\"default\") print $2}'"
-alias get_gateway_linux="netstat -rn | awk '{if($1==\"0.0.0.0\") print $2}'"
+alias get_isp_ip="curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'"
+alias get_gateway_mac='netstat -rn | awk '"'"'{if($1=="default") print $2}'"'"
+alias get_gateway_linux='netstat -rn | awk '"'"'{if($1=="0.0.0.0") print $2}'"'"
 
 # WORK
 if [ -f ~/.dotfiles/.bash_aliases_work ]; then
