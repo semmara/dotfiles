@@ -1,13 +1,18 @@
 #!/bin/bash
 
+source .env.sh
+
+### COMMON ALIASES
 alias ll='ls -la'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias dd='dd bs=4M'
 
-# DEVELOPER TOOLS
+
+### DEVELOPER TOOLS
+# MISC STUFF
 alias show_opened_files="sudo dtrace -n 'syscall::open*:entry { printf(\"%s %s\",execname,copyinstr(arg0)); }' " # by http://www.brendangregg.com/dtrace.html
+alias dd='dd bs=4M'
 
 function command_exists() {
 	if [ $# -lt 1 ]; then
@@ -18,10 +23,24 @@ function command_exists() {
 	type "$1" &> /dev/null ;
 }
 
-alias get_isp_ip="curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'"
-alias get_gateway_mac='netstat -rn | awk '"'"'{if($1=="default") print $2}'"'"
-alias get_gateway_linux='netstat -rn | awk '"'"'{if($1=="0.0.0.0") print $2}'"'"
+function lowercase(){
+    echo "$1" | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/"
+}
 
+# NETWORK STUFF
+alias get_isp_ip="curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'"
+
+if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
+	alias get_gateway='netstat -rn | awk '"'"'{if($1=="default") print $2}'"'"
+else
+	alias get_gateway='netstat -rn | awk '"'"'{if($1=="0.0.0.0") print $2}'"'"
+fi
+
+# DAEMON/AGENT STUFF
+alias ls_daemons="launchctl list"
+
+
+### LOCATION-DEPENDENT
 # WORK
 if [ -f ~/.dotfiles/.bash_aliases_work ]; then
     . ~/.dotfiles/.bash_aliases_work
