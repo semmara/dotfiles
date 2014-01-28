@@ -14,3 +14,10 @@ backup_and_link .bash_profile
 backup_and_link .gdbinit
 backup_and_link .vimrc
 
+source $DFD/.bash_aliases
+
+# git
+if command_exists git ; then
+	git config --global alias.st status 
+	git config --global alias.ci 'commit -v'
+fi
