@@ -1,5 +1,6 @@
 === INSTALL ===
 ```shell
 $ git clone <repo> ~/.dotfiles
-$ bash symlink.sh
+$ cd ~/.dotfiles
+$ bash setup.sh
 ```
