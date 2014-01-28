@@ -1,6 +1,7 @@
 #!/bin/bash
 
-source .env.sh
+DFD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $DFD/.env.sh
 
 ### COMMON ALIASES
 alias ll='ls -la'
@@ -29,6 +30,7 @@ function lowercase(){
 
 # NETWORK STUFF
 alias get_isp_ip="curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'"
+alias fb_reconnect="fritzbox-reconnect.py"
 
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	alias get_gateway='netstat -rn | awk '"'"'{if($1=="default") print $2}'"'"
