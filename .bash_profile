@@ -1,5 +1,9 @@
+# dotfiles
 if [ -f ~/.dotfiles/.bash_aliases ]; then
-    . ~/.dotfiles/.bash_aliases
+	. ~/.dotfiles/.bash_aliases
+fi
+if [ -d ~/.dotfiles/bin ]; then
+	export PATH=~/.dotfiles/bin:$PATH
 fi
 
 # user bin
