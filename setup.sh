@@ -21,4 +21,5 @@ if command_exists git ; then
 	git config --global alias.st status 
 	git config --global alias.ci 'commit -v'
 	git config --global alias.lg 'log --name-status --decorate'
+	git config --global alias.br branch
 fi
