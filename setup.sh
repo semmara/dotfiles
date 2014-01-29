@@ -2,15 +2,28 @@
 
 DFD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 NOW=`date +"%Y_%m_%d_%H_%M_%S"`
+source $DFD/.env.sh
 
 function backup_and_link() {
-	if [ -f $HOME/$1 ]; then
-	        mv $HOME/$1 $HOME/$1_$NOW
+	# usage: backup_and_link <prjfilename> [<sysfilename>]
+	arg1="$1"
+	arg2="$1"
+	if [ "$2" ]; then
+		arg2="$2"
 	fi
-	ln -s $DFD/$1 $HOME/$1
+
+	if [ -f $HOME/$arg2 ]; then
+	        mv $HOME/$arg2 $HOME/$arg2_$NOW
+	fi
+	ln -s $DFD/$arg1 $HOME/$arg2
 }
 
-backup_and_link .bash_profile
+# link scripts
+if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
+	backup_and_link .bash_profile
+else
+	backup_and_link .bash_profile .bashrc
+fi
 backup_and_link .gdbinit
 backup_and_link .vimrc
 
