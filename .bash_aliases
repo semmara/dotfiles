@@ -54,6 +54,14 @@ fi
 # DAEMON/AGENT STUFF
 alias ls_daemons="launchctl list"
 
+# PATH STUFF
+function realpath() {
+	path="."
+	if [ "$1" ]; then
+		path="$1"
+	fi
+	python -c "import os; print os.path.realpath('$path')"
+}
 
 ### LOCATION-DEPENDENT
 # WORK
