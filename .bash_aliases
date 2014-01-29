@@ -4,16 +4,18 @@ DFD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source $DFD/.env.sh
 
 ### COMMON ALIASES
-alias ls='ls --color=auto'
-alias l='ls -CF'
+if [[ "$ENV_UNAMESTR" == 'Linux' ]]; then
+	alias ls='ls --color=auto'
+	alias grep='grep --color=auto'
+	alias egrep='egrep --color=auto'
+	alias fgrep='fgrep --color=auto'
+fi
+#alias l='ls -CF'
 alias la='ls -A'
 alias ll='ls -laF'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias grep='grep --color=auto'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
 alias fsize='du -hs'
 
 
