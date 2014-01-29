@@ -23,6 +23,7 @@ alias fsize='du -hs'
 # MISC STUFF
 alias show_opened_files="sudo dtrace -n 'syscall::open*:entry { printf(\"%s %s\",execname,copyinstr(arg0)); }' " # by http://www.brendangregg.com/dtrace.html
 alias dd='dd bs=4M'
+alias psg='ps ax | grep'
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	alias hardware='system_profiler SPHardwareDataType'
 fi
