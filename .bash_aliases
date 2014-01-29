@@ -7,7 +7,7 @@ source $DFD/.env.sh
 alias ls='ls --color=auto'
 alias l='ls -CF'
 alias la='ls -A'
-alias ll='ls -la'
+alias ll='ls -laF'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
