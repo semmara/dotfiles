@@ -34,5 +34,6 @@ if command_exists git ; then
 	git config --global alias.st status 
 	git config --global alias.ci 'commit -v'
 	git config --global alias.lg 'log --name-status --decorate'
+	git config --global alias.lg2 "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 	git config --global alias.br branch
 fi
