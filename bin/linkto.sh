@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright: 2014 Thorsten Reinecke
+# Author: Thorsten Reinecke
 
 function linkto()
 {
