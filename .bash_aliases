@@ -18,11 +18,12 @@ elif [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 			if [[ "$path" = -* ]]; then :
 			else
 				local dst=${path##*/}
+				local suffix=""
 				# append the time if necessary
-				while [ -e ~/.Trash/"$dst" ]; do
-					dst="`expr "$dst" : '\(.*\)\.[^.]*'` `date +%y%m%d-%H%M%S`.`expr "$dst" : '.*\.\([^.]*\)'`"
+				while [ -e ~/.Trash/$dst$suffix ]; do
+					suffix="_$(date +%y%m%d-%H%M%S)"
 				done
-				mv "$path" ~/.Trash/"$dst"
+				mv "$path" ~/.Trash/$dst$suffix
 			fi
 		done
 	}
