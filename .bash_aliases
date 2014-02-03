@@ -9,6 +9,23 @@ if [[ "$ENV_UNAMESTR" == 'Linux' ]]; then
 	alias grep='grep --color=auto'
 	alias egrep='egrep --color=auto'
 	alias fgrep='fgrep --color=auto'
+elif [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
+	# replacing rm (by http://hints.macworld.com/article.php?story=20080224175659423)
+	function rm () {
+		local path
+		for path in "$@"; do
+			# ignore any arguments
+			if [[ "$path" = -* ]]; then :
+			else
+				local dst=${path##*/}
+				# append the time if necessary
+				while [ -e ~/.Trash/"$dst" ]; do
+					dst="`expr "$dst" : '\(.*\)\.[^.]*'` `date +%H-%M-%S`.`expr "$dst" : '.*\.\([^.]*\)'`"
+				done
+				mv "$path" ~/.Trash/"$dst"
+			fi
+		done
+	}
 fi
 #alias l='ls -CF'
 alias la='ls -A'
