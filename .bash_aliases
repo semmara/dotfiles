@@ -20,7 +20,7 @@ elif [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 				local dst=${path##*/}
 				# append the time if necessary
 				while [ -e ~/.Trash/"$dst" ]; do
-					dst="`expr "$dst" : '\(.*\)\.[^.]*'` `date +%H-%M-%S`.`expr "$dst" : '.*\.\([^.]*\)'`"
+					dst="`expr "$dst" : '\(.*\)\.[^.]*'` `date +%y%m%d-%H%M%S`.`expr "$dst" : '.*\.\([^.]*\)'`"
 				done
 				mv "$path" ~/.Trash/"$dst"
 			fi
