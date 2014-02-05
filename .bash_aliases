@@ -75,6 +75,13 @@ alias fb_reconnect="fritzbox-reconnect.py"
 
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	alias get_gateway='netstat -rn | awk '"'"'{if($1=="default") print $2}'"'"
+	function scan_ports() {
+		ports="1-1023"
+		if [ "$2" ]; then
+			ports="$2"
+		fi
+		nc -vz $1 $ports | grep succeeded
+	}
 else
 	alias get_gateway='netstat -rn | awk '"'"'{if($1=="0.0.0.0") print $2}'"'"
 fi
