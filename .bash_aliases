@@ -42,9 +42,18 @@ alias fsize='du -hs'
 alias openfiles="sudo dtrace -n 'syscall::open*:entry { printf(\"%s %s\",execname,copyinstr(arg0)); }' " # by http://www.brendangregg.com/dtrace.html
 alias dd='dd bs=4M'
 alias psg='ps ax | grep'
-alias grep_syslog='tail -f /var/log/system.log | grep --line-buffered'
+function tailgrep() {
+        if [ $# -lt 2 ]; then
+		scriptname="tailgrep"
+                echo "Usage: $scriptname <file> <search string>"
+                exit
+        fi
+	tail -f $1 | grep --line-buffered $2
+}
+alias grep_syslog='tailgrep /var/log/system.log'
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	alias hardware='system_profiler SPHardwareDataType'
+	alias software='system_profiler SPSoftwareDataType'
 fi
 
 function command_exists() {
