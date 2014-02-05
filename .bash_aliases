@@ -42,6 +42,7 @@ alias fsize='du -hs'
 alias openfiles="sudo dtrace -n 'syscall::open*:entry { printf(\"%s %s\",execname,copyinstr(arg0)); }' " # by http://www.brendangregg.com/dtrace.html
 alias dd='dd bs=4M'
 alias psg='ps ax | grep'
+alias grep_syslog='tail -f /var/log/system.log | grep --line-buffered'
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	alias hardware='system_profiler SPHardwareDataType'
 fi
