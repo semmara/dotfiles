@@ -110,3 +110,8 @@ if [ -f ~/.dotfiles/.bash_aliases_home ]; then
 fi
 
 
+### FUNCTIONS AND ALIASES IN SEPARATE FILES
+for f in $DFD/aliases/*
+do
+	source $f
+done
