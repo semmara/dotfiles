@@ -9,24 +9,24 @@ if [[ "$ENV_UNAMESTR" == 'Linux' ]]; then
 	alias grep='grep --color=auto'
 	alias egrep='egrep --color=auto'
 	alias fgrep='fgrep --color=auto'
-elif [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
+#elif [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	# replacing rm (by http://hints.macworld.com/article.php?story=20080224175659423)
-	function rm () {
-		local path
-		for path in "$@"; do
-			# ignore any arguments
-			if [[ "$path" = -* ]]; then :
-			else
-				local dst=${path##*/}
-				local suffix=""
-				# append the time if necessary
-				while [ -e ~/.Trash/$dst$suffix ]; do
-					suffix="_$(date +%y%m%d-%H%M%S)"
-				done
-				mv "$path" ~/.Trash/$dst$suffix
-			fi
-		done
-	}
+	#function rm () {
+	#	local path
+	#	for path in "$@"; do
+	#		# ignore any arguments
+	#		if [[ "$path" = -* ]]; then :
+	#		else
+	#			local dst=${path##*/}
+	#			local suffix=""
+	#			# append the time if necessary
+	#			while [ -e ~/.Trash/$dst$suffix ]; do
+	#				suffix="_$(date +%y%m%d-%H%M%S)"
+	#			done
+	#			mv "$path" ~/.Trash/$dst$suffix
+	#		fi
+	#	done
+	#}
 fi
 #alias l='ls -CF'
 alias la='ls -A'
@@ -72,6 +72,23 @@ function lowercase(){
 # NETWORK STUFF
 alias get_isp_ip="curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'"
 alias fb_reconnect="fritzbox-reconnect.py"
+function enc.aes256 () {
+	if [ $# -lt 1 ]; then
+		echo "Usage: $0 filename"
+		exit 1
+	fi
+	tar -cvf "$1".tar "$1"
+	openssl enc -e -aes256 -in "$1".tar -out "$1".tar.enc
+}
+function dec.aes256 () {
+	if [ $# -lt 1 ]; then
+		echo "Usage: $0 encrypted_file"
+		exit 1
+	fi
+	tmp_fn="$RANDOM".tar
+	openssl enc -d -aes256 -in "$1" -out tmp_fn
+	tar -xvf tmp_fn
+}
 
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	alias get_gateway='netstat -rn | awk '"'"'{if($1=="default") print $2}'"'"
@@ -111,7 +128,7 @@ fi
 
 
 ### FUNCTIONS AND ALIASES IN SEPARATE FILES
-for f in $DFD/aliases/*
-do
-	source $f
-done
+#for f in $DFD/aliases/*
+#do
+#	source $f
+#done
