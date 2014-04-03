@@ -79,6 +79,7 @@ function enc.aes256 () {
 	fi
 	tar -cvf "$1".tar "$1"
 	openssl enc -e -aes256 -in "$1".tar -out "$1".tar.enc
+	rm "$1".tar
 }
 function dec.aes256 () {
 	if [ $# -lt 1 ]; then
@@ -88,6 +89,7 @@ function dec.aes256 () {
 	tmp_fn="$RANDOM".tar
 	openssl enc -d -aes256 -in "$1" -out $tmp_fn
 	tar -xvf $tmp_fn
+	rm $tmp_fn
 }
 
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
