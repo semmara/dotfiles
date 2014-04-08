@@ -48,6 +48,7 @@ alias fsize='du -hs'
 # MISC STUFF
 alias openfiles="sudo dtrace -n 'syscall::open*:entry { printf(\"%s %s\",execname,copyinstr(arg0)); }' " # by http://www.brendangregg.com/dtrace.html
 alias dd='dd bs=4M'
+alias dd_progress='sudo pkill -USR1 -n -x dd'
 alias psg='ps ax | grep'
 function tailgrep() {
         if [ $# -lt 2 ]; then
