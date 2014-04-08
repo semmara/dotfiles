@@ -27,6 +27,13 @@ if [[ "$ENV_UNAMESTR" == 'Linux' ]]; then
 	#		fi
 	#	done
 	#}
+	function versions() {
+		if [ $# -lt 1 ]; then
+			dpkg -l
+		else
+			dpkg -l | grep '^ii' | grep $1 | awk '{print $2 "\t" $3}'
+		fi
+	}
 fi
 #alias l='ls -CF'
 alias la='ls -A'
