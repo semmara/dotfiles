@@ -99,7 +99,14 @@ function dec.aes256 () {
 	tar -xvf $tmp_fn
 	rm $tmp_fn
 }
-
+function download_content() {
+	if [ $# -lt 1 ]; then
+		echo "Usage: $0 http://example.com/"
+		exit 1
+	fi
+	curl -O "$1"
+	#wget -drc --no-parent "$1" # only on linux
+}
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	alias get_gateway='netstat -rn | awk '"'"'{if($1=="default") print $2}'"'"
 	function scan_ports() {
