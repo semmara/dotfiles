@@ -8,25 +8,6 @@ if [[ "$ENV_UNAMESTR" == 'Linux' ]]; then
 	alias ls='ls --color=auto'
 	alias grep='grep --color=auto'
 	alias egrep='egrep --color=auto'
-	alias fgrep='fgrep --color=auto'
-#elif [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
-	# replacing rm (by http://hints.macworld.com/article.php?story=20080224175659423)
-	#function rm () {
-	#	local path
-	#	for path in "$@"; do
-	#		# ignore any arguments
-	#		if [[ "$path" = -* ]]; then :
-	#		else
-	#			local dst=${path##*/}
-	#			local suffix=""
-	#			# append the time if necessary
-	#			while [ -e ~/.Trash/$dst$suffix ]; do
-	#				suffix="_$(date +%y%m%d-%H%M%S)"
-	#			done
-	#			mv "$path" ~/.Trash/$dst$suffix
-	#		fi
-	#	done
-	#}
 	function versions() {
 		if [ $# -lt 1 ]; then
 			dpkg -l
@@ -34,14 +15,17 @@ if [[ "$ENV_UNAMESTR" == 'Linux' ]]; then
 			dpkg -l | grep '^ii' | grep $1 | awk '{print $2 "\t" $3}'
 		fi
 	}
+elif [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
+	alias do_not_sleep='caffeinate'
 fi
 #alias l='ls -CF'
 alias la='ls -A'
-alias ll='ls -laF'
+alias ll='ls -lahF'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias fsize='du -hs'
+alias fgrep='fgrep --color=auto'
 
 
 ### DEVELOPER TOOLS
