@@ -80,28 +80,30 @@ function lowercase(){
     echo "$1" | sed "y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/"
 }
 
+# CRYPTO STUFF
+function enc.aes256 () {
+        if [ $# -lt 1 ]; then
+                echo "Usage: $0 filename"
+                exit 1
+        fi
+        tar -cvf "$1".tar "$1"
+        openssl enc -e -aes256 -in "$1".tar -out "$1".tar.enc
+        rm "$1".tar
+}
+function dec.aes256 () {
+        if [ $# -lt 1 ]; then
+                echo "Usage: $0 encrypted_file"
+                exit 1
+        fi
+        tmp_fn="$RANDOM".tar
+        openssl enc -d -aes256 -in "$1" -out $tmp_fn
+        tar -xvf $tmp_fn
+        rm $tmp_fn
+}
+
 # NETWORK STUFF
 alias get_isp_ip="curl -s http://checkip.dyndns.org | sed 's/[a-zA-Z/<> :]//g'"
 alias fb_reconnect="fritzbox-reconnect.py"
-function enc.aes256 () {
-	if [ $# -lt 1 ]; then
-		echo "Usage: $0 filename"
-		exit 1
-	fi
-	tar -cvf "$1".tar "$1"
-	openssl enc -e -aes256 -in "$1".tar -out "$1".tar.enc
-	rm "$1".tar
-}
-function dec.aes256 () {
-	if [ $# -lt 1 ]; then
-		echo "Usage: $0 encrypted_file"
-		exit 1
-	fi
-	tmp_fn="$RANDOM".tar
-	openssl enc -d -aes256 -in "$1" -out $tmp_fn
-	tar -xvf $tmp_fn
-	rm $tmp_fn
-}
 function download_content() {
 	if [ $# -lt 1 ]; then
 		echo "Usage: $0 http://example.com/"
@@ -112,19 +114,21 @@ function download_content() {
 }
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	alias get_gateway='netstat -rn | awk '"'"'{if($1=="default") print $2}'"'"
-	function scan_ports() {
-		ports="1-1023"
-		if [ "$2" ]; then
-			ports="$2"
-		fi
-		nc -vz $1 $ports | grep succeeded
-	}
 else
 	alias get_gateway='netstat -rn | awk '"'"'{if($1=="0.0.0.0") print $2}'"'"
 fi
+function scan_ports() {
+	ports="1-1023"
+	if [ "$2" ]; then
+		ports="$2"
+	fi
+	nc -vz $1 $ports | grep succeeded
+}  
 
 # DAEMON/AGENT STUFF
-alias ls_daemons="launchctl list"
+if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
+	alias ls_daemons="launchctl list"
+fi
 
 # PATH STUFF
 function realpath() {
