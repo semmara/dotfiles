@@ -120,8 +120,9 @@ fi
 if [ -d ~/.dotfiles/bin ]; then
 	export PATH=~/.dotfiles/bin:$PATH
 fi
+
 # for Python
-if [ -d ~/.dotfiles/.pystartup ]; then
+if [ -f ~/.dotfiles/.pystartup ]; then
 	export PYTHONSTARTUP=~/.dotfiles/.pystartup
 fi
 
