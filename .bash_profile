@@ -5,6 +5,10 @@ fi
 if [ -d ~/.dotfiles/bin ]; then
 	export PATH=~/.dotfiles/bin:$PATH
 fi
+# for Python
+if [ -d ~/.dotfiles/.pystartup ]; then
+	export PYTHONSTARTUP=~/.pystartup
+fi
 
 # user bin
 if [ -d ~/bin ]; then
