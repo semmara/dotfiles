@@ -58,6 +58,9 @@ try:
 except IOError:
     pass
 import atexit
+readline.set_history_length(5000)
 atexit.register(readline.write_history_file, histfile)
 
 del os, atexit, TabCompleter, histfile
+del readline
+#del rlcompleter
