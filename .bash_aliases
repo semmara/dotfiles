@@ -65,7 +65,8 @@ alias grep_syslog='tailgrep /var/log/system.log'
 if [[ "$ENV_UNAMESTR" == 'Darwin' ]]; then
 	alias hardware='system_profiler SPHardwareDataType'
 	alias software='system_profiler SPSoftwareDataType'
-	alias update_macports='sudo port -d selfupdate'
+	alias macports_update='sudo port -d selfupdate'
+	alias macports_uninstall_package='sudo port uninstall --follow-dependencies'
 fi
 
 function command_exists() {
