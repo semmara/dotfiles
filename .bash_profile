@@ -135,5 +135,12 @@ if [ -d ~/.bin ]; then
 fi
 
 # for MacPorts
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+#export PATH=/opt/local/bin:/opt/local/sbin:$PATH
+# for brew
+export PATH=/usr/local/bin:$PATH
 
+
+# Setting PATH for Python 3.4
+# The orginal version is saved in .bash_profile.pysave
+#PATH="/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
+#export PATH
